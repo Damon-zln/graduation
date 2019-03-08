@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="header::headerFragment"></head>
+<link th:href="@{/layui/css/layui.css}" rel="stylesheet" />
+<body>
+<div id="wrapper">
+	<div th:replace="header::header-body"></div>
+	<div id="page-wrapper">
+		<div class="header">
+			<h1 class="page-header">
+				总览
+			</h1>
+		</div>
+		<div id="page-inner">
+			<div class="dashboard-cards">
+				<div class="row">
+					<!--<button type="button" class="layui-btn" id="uploadBtn">-->
+						<!--<i class="layui-icon"></i>上传-->
+					<!--</button>-->
+					<div class="layui-upload-drag" id="uploadBtn">
+						<i class="layui-icon"></i>
+						<p>点击上传，或将文件拖拽到此处</p>
+					</div>
+				</div>
+				<div class="row">
+					<div class="layui-upload-list">
+						<img class="layui-upload-img" style="width: 300px; height: 200px; margin: 0 10px 10px 0;" id="images"/>
+					</div>
+					<a class="layui-btn layui-btn-xs">下载</a>
+					<a class="layui-btn layui-btn-xs">删除</a>
+				</div>
+			</div>
+		</div>
+		<!-- /. PAGE INNER  -->
+	</div>
+</div>
+<div th:replace="footer :: footer"></div>
+<script th:src="@{/layui/layui.js}" type="text/javascript"></script>
+<script type="text/javascript">
+	/*<![CDATA[*/
+    layui.use('upload', function () {
+        var upload = layui.upload;
+        //执行实例
+        var uploadInst = upload.render({
+            elem: '#uploadBtn' //绑定元素
+            , url: '/upload' //上传接口
+            , multiple: true
+            , before: function (obj) {
+                //可设置回显
+                obj.preview(function(index, file, result) {
+                	$('#images').attr('src', result);
+                });
+                console.log(obj)
+            }
+            , done: function (res) {
+                console.log(res);
+                //上传完毕回调
+                if (res.code != 1000) {
+                    return layer.msg('上传失败');
+                } else {
+                    return layer.msg('上传成功');
+                }
+                $.ajax({
+                	'type': 'get',
+                	'url': 'loadPic',
+                	'success': function(result) {
+                		console.log(result)
+                	},
+                	'error': function(result) {
+                		console.log(result)
+                	}
+                });
+            }
+            , error: function () {
+                //请求异常回调
+            }
+        });
+    });
+	/*]]>*/
+</script>
+</body>
+</html>

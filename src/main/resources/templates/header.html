@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="headerFragment">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title></title>
+    <link th:href="@{/css/icon.css}" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/materialize.min.css}" media="screen,projection" />
+    <!-- Bootstrap Styles-->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
+    <!-- FontAwesome Styles-->
+    <link th:href="@{/css/font-awesome.css}" rel="stylesheet" />
+    <!-- Custom Styles-->
+    <link th:href="@{/css/custom-styles.css}" rel="stylesheet" />
+</head>
+
+<div th:fragment="header-body">
+    <nav class="navbar navbar-default top-navbar" role="navigation">
+        <div class="navbar-header">
+            <a class="navbar-brand waves-effect waves-dark" href=""><i class="large material-icons">track_changes</i>
+                <strong>Sys Backend</strong></a>
+
+            <div id="sideNav" href=""><i class="material-icons dp48">toc</i></div>
+        </div>
+
+        <ul class="nav navbar-top-links navbar-right">
+            <li><a class="dropdown-button waves-effect waves-dark" href="#!" data-activates="dropdown1">
+                <img th:src="@{/img/logo.png}" width="20" height="20" class="img-circle" />
+                <b>Damon</b> <i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+    </nav>
+    <!-- Dropdown Structure -->
+    <ul id="dropdown1" class="dropdown-content">
+        <li><a th:href="@{/logout}"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+        </li>
+    </ul>
+
+    <!--/. NAV TOP  -->
+    <nav class="navbar-default navbar-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav" id="main-menu">
+                <li>
+                    <a href="#" class="active-menu waves-effect waves-dark" data-code="index"><i class="fa fa-dashboard"></i>总览</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+</html>
